@@ -11,6 +11,8 @@ var ass = new schema({
     problems: [{
         'qid' : Number,
         'pid' : String,
+        'desc': String,
+        'link' : String,
         'solved': [String],
         'attempted': [String]
     }]
@@ -18,4 +20,4 @@ var ass = new schema({
 
 
 
-module.exports = mongoose.model('Ass', ass);
+module.exports = mongoose.model('Ass', ass, 'assignments');

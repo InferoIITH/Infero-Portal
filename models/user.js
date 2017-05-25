@@ -1,4 +1,7 @@
 var mongoose = require('mongoose');
+require('mongoose-double')(mongoose);
+
+var SchemaTypes = mongoose.Schema.Types;
 
 var schema = mongoose.Schema;
 
@@ -67,6 +70,7 @@ var user = new schema({
     },
     spoj: {
         'handle': String,
+        'points': SchemaTypes.Double,
         'problems': {
             'solved': [String],
             'todo': [String]
@@ -74,4 +78,4 @@ var user = new schema({
     }
 });
 
-module.exports = mongoose.model('User', user);
+module.exports = mongoose.model('User', user,'users');

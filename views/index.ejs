@@ -1,11 +1,92 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+<head>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/node_modules/angular-material/angular-material.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="/css/materialize.min.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="/node_modules/font-awesome/css/font-awesome.css"/>
+
+</head>
+
+<style>
+    body {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+    }
+
+    main {
+        flex: 1 0 auto;
+    }
+
+</style>
+
+<body>
+    <!--scripts -->
+    <script src="/node_modules/angular/angular.js"></script>
+    <script type="text/javascript" src="/js/materialize.min.js"></script>
+    <header>
+    <nav>
+
+        <div class="nav-wrapper black">
+            <a href="#" data-activates="mobile-view" class="button-collapse"><i class="material-icons">menu</i></a>
+            <a href="#!" class="brand-logo center">Infero</a>
+            <ul class="left hide-on-med-and-down">
+                <li class="active"><a href="/">Blog</a></li>
+                <li><a href="/ranks">Standings</a></li>
+                <li><a href="/contests">Contests</a> </li>
+                <li><a href="/assignments">Assignments</a></li>
+            </ul>
+
+            <ul class="right hide-on-med-and-down">
+                <li> <a href="/oauth/google/"><span class="fa fa-google-plus"></span>Login</a></li>
+                <>
+            </ul>
+            <ul id="mobile-view" class="side-nav">
+                <li class="active"><a href="/">Blog</a></li>
+                <li><a href="/ranks">Standings</a></li>
+                <li><a href="/contests">Contests</a> </li>
+                <li><a href="/assignments">Assignments</a></li>
+                <li> <a href="/oauth/google/"><span class="fa fa-google-plus"></span>Login</a></li>
+            </ul>
+        </div>
+    </nav>
+    </header>
+
+    <main>
+
+
+    </main>
+
+
+    <footer class="page-footer black">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Infero Portal</h5>
+                    <p class="grey-text text-lighten-4">A portal for infero IITH for managing contests and club events.</p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Links</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="http://gymkhana.iith.ac.in">Gymkhana IITH</a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © IIT Hyderabad
+                <a class="grey-text text-lighten-4 right" href="http://iith.ac.in/">IITH website</a>
+            </div>
+        </div>
+    </footer>
+
+    </footer>
+
+</body>
+
+
 </html>
