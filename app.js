@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var passport = require('passport');
 var index = require('./routes/index');
 var profile = require('./routes/profile');
+//var ranks = require('./routes/ranks');
 var mongoose = require('mongoose');
 var session = require('express-session');
 
@@ -35,7 +36,7 @@ app.use(passport.session());
 
 app.use('/', index);
 app.use('/profile', profile);
-
+//app.use('/ranks',ranks);
 
 //mongoose
 mongoose.connect('mongodb://localhost/infero');
