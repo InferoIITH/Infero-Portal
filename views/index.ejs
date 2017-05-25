@@ -3,9 +3,13 @@
 <head>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="/css/materialize.min.css"  media="screen,projection"/>
-    <link type="text/css" rel="stylesheet" href="/node_modules/font-awesome/css/font-awesome.css"/>
+    <link rel="stylesheet" href="/css/materialize.min.css"  media="screen,projection"/>
+    <link rel="stylesheet" href="/node_modules/font-awesome/css/font-awesome.css"/>
 
+    <!--scripts -->
+    <script src="/node_modules/angular/angular.js"/>
+    <script type="text/javascript" src="/js/ng.infero.js"/>
+    <script src="/js/materialize.min.js"/>
 </head>
 
 <style>
@@ -21,16 +25,12 @@
 
 </style>
 
-<body>
-    <!--scripts -->
-    <script src="/node_modules/angular/angular.js"></script>
-    <script type="text/javascript" src="/js/materialize.min.js"></script>
+<body ng-app="infero" ng-controller="infero-controller">
     <header>
     <nav>
-
-        <div class="nav-wrapper black">
+        <div class="nav-wrapper blue-grey darken-4">
             <a href="#" data-activates="mobile-view" class="button-collapse"><i class="material-icons">menu</i></a>
-            <a href="#!" class="brand-logo center">Infero</a>
+            <a href="/" class="brand-logo center">Infero</a>
             <ul class="left hide-on-med-and-down">
                 <li class="active"><a href="/">Blog</a></li>
                 <li><a href="/ranks">Standings</a></li>
@@ -38,16 +38,15 @@
                 <li><a href="/assignments">Assignments</a></li>
             </ul>
 
-            <ul class="right hide-on-med-and-down">
-                <li> <a href="/oauth/google/"><span class="fa fa-google-plus"></span>Login</a></li>
-                <>
+            <ul class="right hide-on-med-and-down" style="padding-right: 10px">
+                <li class="red darken-4"> <a href="/oauth/google/"><span class="fa fa-google-plus" style = "padding-right: 5px"></span>Login</a></li>
             </ul>
             <ul id="mobile-view" class="side-nav">
                 <li class="active"><a href="/">Blog</a></li>
                 <li><a href="/ranks">Standings</a></li>
                 <li><a href="/contests">Contests</a> </li>
                 <li><a href="/assignments">Assignments</a></li>
-                <li> <a href="/oauth/google/"><span class="fa fa-google-plus"></span>Login</a></li>
+                <li> <a href="/oauth/google/"><span class="fa fa-google-plus"><div class="divider"></div></span>Login</a></li>
             </ul>
         </div>
     </nav>
@@ -59,7 +58,7 @@
     </main>
 
 
-    <footer class="page-footer black">
+    <footer class="page-footer blue-grey darken-3">
         <div class="container">
             <div class="row">
                 <div class="col l6 s12">
