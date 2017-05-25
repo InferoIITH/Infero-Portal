@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="/css/materialize.min.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="/node_modules/font-awesome/css/font-awesome.css"/>
+    <!--scripts -->
+    <script src="/node_modules/angular/angular.js"></script>
+    <script type="text/javascript" src="/node_modules/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="/js/materialize.min.js"></script>
+    <script type="text/javascript" src="/js/ng.infero.js"></script>
+</head>
+
+<style>
+    body {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+    }
+    main {
+        flex: 1 0 auto;
+    }
+</style>
+
+<body ng-app="Infero" ng-controller="InferoController">
+    <header>
+    <nav>
+
+        <div class="nav-wrapper blue-grey darken-4">
+            <a href="#" data-activates="mobile-view" class="button-collapse"><i class="material-icons">menu</i></a>
+            <a href="#!" class="brand-logo center">Infero</a>
+            <ul class="left hide-on-med-and-down">
+                <li class="active"><a href="/">Blog</a></li>
+                <li><a href="/ranks">Standings</a></li>
+                <li><a href="/contests">Contests</a> </li>
+                <li><a href="/assignments">Assignments</a></li>
+            </ul>
+
+            <ul class="right hide-on-med-and-down" style="padding-right: 10px">
+                <li ng-if="user.loggedIn == false" class="red darken-4" > <a href="/oauth/google/"><span class="fa fa-google-plus style = "padding-right: 5px"></span>Login</a></li>
+                <li ng-if="user.loggedIn == true" "> <a href="/profile"><span class="fa fa-user-circle" style = "padding-right: 5px"></span> {{user.Name}} </a></li>
+            </ul>
+            <ul id="mobile-view" class="side-nav">
+                <li class="active"><a href="/">Blog</a></li>
+                <li><a href="/ranks">Standings</a></li>
+                <li><a href="/contests">Contests</a> </li>
+                <li><a href="/assignments">Assignments</a></li>
+                <li ng-if="user.loggedIn == false" class="red darken-4"> <a href="/oauth/google/"><span class="fa fa-google-plus" style = "padding-right: 5px"></span>Login</a></li>
+                <li ng-if="user.loggedIn == true" > <a href="/profile"><span class="fa fa-user-circle" style = "padding-right: 5px"></span> {{user.Name}} </a></li>
+            </ul>
+        </div>
+    </nav>
+    </header>
+
+    <main>
+        <div class="divider"></div>
+        <div class="container">
+          <div class="row valign-wrapper">
+            <div class="col s8 offset-s2 valign">
+              <div class="card blue lighten-5">
+                <div class="card-content">
+                  <span class="card-title"><strong>Handle Information</strong></span>
+                  <table>
+                      <thead>
+                          <tr>
+                              <th> Wesbite </th>
+                              <th> Handle  </th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr>
+                            <td><strong>Codeforces</strong></td>
+                            <td>{{user.codeforces.handle}}</td>
+                          </tr>
+                          <tr>
+                            <td><strong>SpoJ</td>
+                            <td>{{user.spoj.handle}}</td>
+                          </tr>
+                          <tr>
+                            <td><strong>Hackerrank</td>
+                            <td>{{user.hackerrank.handle}}</td>
+                          </tr>
+                          <tr>
+                            <td><strong>Codechef</td>
+                            <td>{{user.codechef.handle}}</td>
+                          </tr>
+                          <tr>
+                            <td><strong>A2oJ</td>
+                            <td>{{user.a20j.handle}}</td>
+                          </tr>
+                          <tr>
+                            <td><strong>Github</td>
+                            <td>{{user.github.handle}}</td>
+                          </tr>
+                          <tr>
+                            <td><strong>Hackerearth</td>
+                            <td>{{user.hackerearth.handle}}</td>
+                          </tr>  
+                      </tbody>        
+                  </table>
+                </div>
+                <div class="card-action blue-grey darken-4">
+                  <a href="#updateHandles" ng-click="updateInfo()" class="modal-trigger waves-effect waves-light btn"> <span class="blue-grey-text text-lighten-4">Update</span></a>
+                </div>
+
+                 <div id="updateHandles" class="modal modal-fixed-footer">
+                    <div class="modal-content">
+                      <h4><strong>Update Handles</strong></h4>
+                        <div class="row valign-wrapper">
+                            <form class="col s8 offset-s2 valign">
+                              <div class="row">
+                                <div class="input-field col s8">
+                                    <input placeholder="Codeforces" id="cforces" type="text" class="validate">
+                                    <label for="cforces">Codeforces</label>
+                                </div> 
+
+                                <div class="input-field col s8">
+                                    <input placeholder="SpoJ" id="spoj" type="text" class="validate">
+                                    <label for="spoj">SpoJ</label>
+                                </div>  
+
+                                <div class="input-field col s8">
+                                    <input placeholder="Hackerrank" id="hrank" type="text" class="validate">
+                                    <label for="hrank">Hackerrank</label>
+                                </div>  
+
+
+                                <div class="input-field col s8">
+                                    <input placeholder="Codechef" id="cchef" type="text" class="validate">
+                                    <label for="cchef">Codechef</label>
+                                </div>  
+
+                                <div class="input-field col s8">
+                                    <input placeholder="A20j" id="a20j" type="text" class="validate">
+                                    <label for="a20j">A20j</label>
+                                </div>  
+
+                                <div class="input-field col s8">
+                                    <input placeholder="Github" id="ghub" type="text" class="validate">
+                                    <label for="ghub">Github</label>
+                                </div>     
+                                <div class="input-field col s8">
+                                    <input placeholder="Hackerearth" id="hearth" type="text" class="validate">
+                                    <label for="hearth">Hackerearth</label>
+                                </div>  
+                              </div>
+                            </form>
+                        </div>  
+                    </div>
+                    <div class="modal-footer">
+                      <a href="#!" ng-click="updateHandles()" class="modal-action modal-close waves-effect waves-green btn-flat ">Update</a>
+                    </div>
+                  </div>
+                          
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+    </main>
+
+
+    <footer class="page-footer blue-grey darken-3">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Infero Portal</h5>
+                    <p class="grey-text text-lighten-4">A portal for infero IITH for managing contests and club events.</p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Links</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="http://gymkhana.iith.ac.in">Gymkhana IITH</a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © IIT Hyderabad
+                <a class="grey-text text-lighten-4 right" href="http://iith.ac.in/">IITH website</a>
+            </div>
+        </div>
+    </footer>
+
+    </footer>
+
+</body>
+
+<script>
+    $(".dropdown-button").dropdown();
+    $(".button-collapse").sideNav();
+    $(document).ready(function(){
+        $('.modal').modal();
+    });
+</script>
+</html>

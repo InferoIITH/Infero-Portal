@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="/css/materialize.min.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="/node_modules/font-awesome/css/font-awesome.css"/>
+    <!--scripts -->
+    <script src="/node_modules/angular/angular.js"></script>
+    <script type="text/javascript" src="/node_modules/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="/js/materialize.min.js"></script>
+    <script type="text/javascript" src="/js/ng.infero.js"></script>
+</head>
+
+<style>
+    body {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+    }
+    main {
+        flex: 1 0 auto;
+    }
+</style>
+
+<body ng-app="Infero" ng-controller="InferoController">
+    <header>
+    <nav>
+
+        <div class="nav-wrapper blue-grey darken-4">
+            <a href="#" data-activates="mobile-view" class="button-collapse"><i class="material-icons">menu</i></a>
+            <a href="#!" class="brand-logo center">Infero</a>
+            <ul class="left hide-on-med-and-down">
+                <li class="active"><a href="/">Blog</a></li>
+                <li><a href="/ranks">Standings</a></li>
+                <li><a href="/contests">Contests</a> </li>
+                <li><a href="/assignments">Assignments</a></li>
+            </ul>
+
+            <ul class="right hide-on-med-and-down" style="padding-right: 10px">
+                <li ng-if="user.loggedIn == false" class="red darken-4" > <a href="/oauth/google/"><span class="fa fa-google-plus style = "padding-right: 5px"></span>Login</a></li>
+                <li ng-if="user.loggedIn == true" "> <a href="/profile"><span class="fa fa-user-circle" style = "padding-right: 5px"></span> {{user.Name}} </a></li>
+            </ul>
+            <ul id="mobile-view" class="side-nav">
+                <li class="active"><a href="/">Blog</a></li>
+                <li><a href="/ranks">Standings</a></li>
+                <li><a href="/contests">Contests</a> </li>
+                <li><a href="/assignments">Assignments</a></li>
+                <li ng-if="user.loggedIn == false" class="red darken-4"> <a href="/oauth/google/"><span class="fa fa-google-plus" style = "padding-right: 5px"></span>Login</a></li>
+                <li ng-if="user.loggedIn == true" > <a href="/profile"><span class="fa fa-user-circle" style = "padding-right: 5px"></span> {{user.Name}} </a></li>
+            </ul>
+        </div>
+    </nav>
+    </header>
+
+    <main>
+
+
+    </main>
+
+
+    <footer class="page-footer blue-grey darken-3">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Infero Portal</h5>
+                    <p class="grey-text text-lighten-4">A portal for infero IITH for managing contests and club events.</p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Links</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="http://gymkhana.iith.ac.in">Gymkhana IITH</a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © IIT Hyderabad
+                <a class="grey-text text-lighten-4 right" href="http://iith.ac.in/">IITH website</a>
+            </div>
+        </div>
+    </footer>
+
+    </footer>
+
+</body>
+
+<script>
+    $(".dropdown-button").dropdown();
+    $(".button-collapse").sideNav();
+    $(document).ready(function(){
+        $('.modal-trigger').modal();
+    });
+</script>
+</html>

@@ -13,7 +13,7 @@ module.exports = function(passport) {
 
     // used to deserialize the user
     passport.deserializeUser(function(id, done) {
-        User.findById(id, function(err, user) {
+        User.findOne({"id" : id }, function(err, user) {
             done(err, user);
         });
     });
@@ -26,7 +26,7 @@ module.exports = function(passport) {
         function(token, refreshToken, profile, done) {
 
             process.nextTick(function() {
-
+		console.log(profile.emails[0].value);
                 User.findOne({ 'email' :  profile.emails[0].value }, function(err, user) {
                     if (err)
                         return done(err);
@@ -35,8 +35,6 @@ module.exports = function(passport) {
                         return done(null, user);
                     } else {
                         var newUser          = new User();
-                        newUser.google.id    = profile.id;
-                        newUser.google.token = token;
                         newUser.Name  = profile.displayName;
                         newUser.email = profile.emails[0].value;
 
