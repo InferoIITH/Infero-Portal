@@ -31,7 +31,7 @@
             <a href="#" data-activates="mobile-view" class="button-collapse"><i class="material-icons">menu</i></a>
             <a href="#!" class="brand-logo center">Infero</a>
             <ul class="left hide-on-med-and-down">
-                <li class="active"><a href="/">Blog</a></li>
+                <li class="active"><a href="/">Home</a></li>
                 <li><a href="/ranks">Standings</a></li>
                 <li><a href="/contests">Contests</a> </li>
                 <li><a href="/assignments">Assignments</a></li>
@@ -42,7 +42,7 @@
                 <li ng-if="user.loggedIn == true" "> <a href="/profile"><span class="fa fa-user-circle" style = "padding-right: 5px"></span> {{user.Name}} </a></li>
             </ul>
             <ul id="mobile-view" class="side-nav">
-                <li class="active"><a href="/">Blog</a></li>
+                <li class="active"><a href="/">Home</a></li>
                 <li><a href="/ranks">Standings</a></li>
                 <li><a href="/contests">Contests</a> </li>
                 <li><a href="/assignments">Assignments</a></li>
@@ -54,6 +54,42 @@
     </header>
 
     <main>
+
+        <div class="divider"></div>
+        <div class="container">
+          <div class="row valign-wrapper">
+            <div class="col s8 offset-s2 valign">
+              <div class="card grey lighten-5">
+                <div class="card-content">
+                  <span class="card-title"><strong>Current Standings</strong></span>
+                    <table class="striped centered">
+                        <thead>
+                          <tr>
+                              <th> Rank </th>
+                              <th> Name </th>
+                              <th> Codeforces rating </th>
+                              <th> Codechef rating  </th>
+                              <th> Hackerrank rating </th>
+                              <th> Net rating </th>
+                          </tr>
+                        <tbody>  
+                          <tr ng-repeat="user in users">
+                            <td> <strong> #{{$index+1}} </strong> </td>
+                            <td>  {{user.Name}} </td>
+                            <td>  {{user.codeforces.rating}}</td>
+                            <td>  {{user.codechef.rating}}</td>
+                            <td> {{user.hackerrank.rating}} </td>
+                            <td> {{user.netRating}} </td>
+                          <tr>
+                        </tbody>
+                      </thead>
+
+                    </table>
+                 </div>
+             </div>
+         </div>
+         </div>
+         </div>
 
 
     </main>

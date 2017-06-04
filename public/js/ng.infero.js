@@ -3,6 +3,7 @@ var app = angular.module('Infero',[]);
 
 app.controller('InferoController',function($scope,$http){
 	$scope.user = {};
+	$scope.users = [];
 	$scope.user.loggedIn = false;
 
 	$http({
@@ -15,6 +16,23 @@ app.controller('InferoController',function($scope,$http){
 		}
 	},function myError(res){
 		console.log("Error in checking login status");
+	});
+
+	$http({
+		method : "GET",
+		url    : '/ranks/getStandings'
+	}).then(function mySuccess(res){
+		if(res.data.status){
+			$scope.users = res.data.users;
+			for(var i = 0; i < $scope.users.length; i++)
+			{
+				var z = (parseFloat($scope.users[i].codeforces.rating)*0.5) + (0.25*(parseFloat($scope.users[i].codechef.rating) + parseFloat($scope.users[i].hackerrank.rating)));
+				$scope.users[i].netRating = z.toString();
+			}
+			
+		}
+	   },function myError(res){
+	   	console.log("Error in getting all users");
 	});
 
 	$scope.updateInfo = function() {
@@ -45,7 +63,7 @@ app.controller('InferoController',function($scope,$http){
 			data: info
 		}).then(function mySuccess(res){
 			if(res.data.status) {
-				Materialize.toast("Updated handle information!",2000);
+				Materialize.toast("Updated handle information, please reload to see changes!",2000);
 			}
 		},function myError(res){
 			console.log("Error in updating handles");
