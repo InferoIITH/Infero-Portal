@@ -8,6 +8,8 @@ var passport = require('passport');
 var index = require('./routes/index');
 var profile = require('./routes/profile');
 var ranks = require('./routes/ranks');
+var contests = require('./routes/contests');
+var assignments = require('./routes/assignments');
 var mongoose = require('mongoose');
 var session = require('express-session');
 
@@ -15,6 +17,8 @@ var session = require('express-session');
 var cfbot = require('./portal-bots/codeforces');
 var ccbot = require('./portal-bots/codechef');
 var hrbot = require('./portal-bots/hackerrank');
+var spbot = require('./portal-bots/spoj');
+
 process.on('unhandledRejection', function(err, promise) {
     console.error('Unhandled rejection (promise: ', promise, ', reason: ', err, ').');
 });
@@ -45,11 +49,13 @@ app.use(passport.session());
 app.use('/', index);
 app.use('/profile', profile);
 app.use('/ranks',ranks);
-
+app.use('/assignments',assignments);
+app.use('/contests',contests);
 //mongoose
 mongoose.connect('mongodb://localhost/infero');
 ccbot.codechefCronJob();
 cfbot.codeforcesCronJob();
 hrbot.hackerrankCronJob();
+spbot.spojCronJob();
 
 module.exports = app;

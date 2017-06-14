@@ -8,6 +8,7 @@
     <!--scripts -->
     <script src="/node_modules/angular/angular.js"></script>
     <script type="text/javascript" src="/node_modules/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="/node_modules/angular-sanitize/angular-sanitize.js"></script>
     <script type="text/javascript" src="/js/materialize.min.js"></script>
     <script type="text/javascript" src="/js/ng.infero.js"></script>
 </head>
@@ -55,6 +56,34 @@
 
     <main>
 
+        <div class="divider"></div>
+        <div class="container">
+          <div class="row valign-wrapper">
+            <div class="col s8 offset-s2 valign">
+              <div class="card grey lighten-5">
+                <div class="card-content">
+                  <span class="card-title"><strong>Current Standings</strong></span>
+                    <table class="striped centered">
+                        <thead>
+                          <tr>
+                              <th> Sr. No. </th>
+                              <th> Name </th>
+
+                          </tr>
+                        <tbody>  
+                          <tr ng-repeat="assignment in assignments">
+                            <td> <strong> #{{$index+1}} </strong> </td>
+                            <td>  {{assignment.id}} </td>
+                          <tr>
+                        </tbody>
+                      </thead>
+
+                    </table>
+                 </div>
+             </div>
+         </div>
+         </div>
+         </div>
 
     </main>
 
@@ -91,7 +120,7 @@
     $(".dropdown-button").dropdown();
     $(".button-collapse").sideNav();
     $(document).ready(function(){
-        $('.modal-trigger').leanModal();
+        $('.modal').modal();
     });
 </script>
 </html>

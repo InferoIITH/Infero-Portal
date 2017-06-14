@@ -4,7 +4,7 @@ var User = require('../models/user');
 
 router.post('/updateHandles',function(req, res){
 	var data = req.body;
-	User.findOne({ "id" : req.user.id } ,function(err,user){
+	User.findById(req.user._id, function(err,user){
 		if(err) {
 			console.log(err);
 			res.send({status : false})

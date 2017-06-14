@@ -5,19 +5,20 @@ var request = require('request');
 
 function check_validity(a)
 {
-	return a.codeforces.handle && a.hackerrank.handle && a.codechef.handle;
+	return a.codeforces.handle && a.hackerrank.handle && a.codechef.handle && a.spoj.handle;
 }
 
 router.get('/getStandings',function(req,res){
 	User.find({}, function(err, users) {
 		var valid_users = users.filter(check_validity);
 		valid_users.sort(function(a,b){
-			if(parseFloat(a.codeforces.rating)*0.5 + (parseFloat(a.codechef.rating) + parseFloat(a.hackerrank.rating))*0.25 > parseFloat(b.codeforces.rating)*0.5 + (parseFloat(b.codechef.rating) + parseFloat(b.hackerrank.rating))*0.25)
+			if( (parseFloat(a.spoj.points)*300.0 + parseFloat(a.codeforces.rating)*0.5 + (parseFloat(a.codechef.rating) + parseFloat(a.hackerrank.rating))*0.25) > (parseFloat(b.spoj.points)*300.0 + parseFloat(b.codeforces.rating)*0.5 + (parseFloat(b.codechef.rating) + parseFloat(b.hackerrank.rating))*0.25) )
 				return -1;
-			else if(parseFloat(a.codeforces.rating)*0.5 + (parseFloat(a.codechef.rating) + parseFloat(a.hackerrank.rating))*0.25 < parseFloat(b.codeforces.rating)*0.5 + (parseFloat(b.codechef.rating) + parseFloat(b.hackerrank.rating))*0.25)
+			else if( (parseFloat(a.spoj.points)*300.0 + parseFloat(a.codeforces.rating)*0.5 + (parseFloat(a.codechef.rating) + parseFloat(a.hackerrank.rating))*0.25) < (parseFloat(b.spoj.points)*300.0 + parseFloat(b.codeforces.rating)*0.5 + (parseFloat(b.codechef.rating) + parseFloat(b.hackerrank.rating))*0.25) )
 				return 1;
+			else
+				return 0;
 		});
-
 		res.send({'status' : true, 'users' : valid_users});
 	});
 });

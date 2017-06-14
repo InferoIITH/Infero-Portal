@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-require('mongoose-double')(mongoose);
 
 var SchemaTypes = mongoose.Schema.Types;
 
@@ -19,7 +18,7 @@ var user = new schema({
     },
     codechef: {
         'handle': String,
-        'rating': Number,
+        'rating': String,
         'contests': {
             'given': [String],
             'giving': [String]
@@ -31,7 +30,7 @@ var user = new schema({
     },
     codeforces: {
         'handle': String,
-        'rating': Number,
+        'rating': String,
         'contests': {
             'given': [String],
             'giving': [String]
@@ -46,7 +45,7 @@ var user = new schema({
     },
     hackerearth: {
         'handle': String,
-        'rating': Number,
+        'rating': String,
         'contests': {
             'given': [String],
             'giving': [String]
@@ -58,7 +57,7 @@ var user = new schema({
     },
     hackerrank: {
         'handle': String,
-        'rating': Number,
+        'rating': String,
         'contests': {
             'given': [String],
             'giving': [String]
@@ -70,7 +69,7 @@ var user = new schema({
     },
     spoj: {
         'handle': String,
-        'points': SchemaTypes.Double,
+        'points': String,
         'problems': {
             'solved': [String],
             'todo': [String]

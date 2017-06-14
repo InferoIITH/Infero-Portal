@@ -7,6 +7,7 @@
     <link type="text/css" rel="stylesheet" href="/node_modules/font-awesome/css/font-awesome.css"/>
     <!--scripts -->
     <script src="/node_modules/angular/angular.js"></script>
+    <script type="text/javascript" src="/node_modules/angular-sanitize/angular-sanitize.js"></script>
     <script type="text/javascript" src="/node_modules/jquery/dist/jquery.js"></script>
     <script type="text/javascript" src="/js/materialize.min.js"></script>
     <script type="text/javascript" src="/js/ng.infero.js"></script>
@@ -70,6 +71,7 @@
                               <th> Codeforces rating </th>
                               <th> Codechef rating  </th>
                               <th> Hackerrank rating </th>
+                              <th> Spoj points </th>
                               <th> Net rating </th>
                           </tr>
                         <tbody>  
@@ -79,6 +81,7 @@
                             <td>  {{user.codeforces.rating}}</td>
                             <td>  {{user.codechef.rating}}</td>
                             <td> {{user.hackerrank.rating}} </td>
+                            <td> {{user.spoj.points}}</td>
                             <td> {{user.netRating}} </td>
                           <tr>
                         </tbody>
@@ -90,7 +93,6 @@
          </div>
          </div>
          </div>
-
 
     </main>
 

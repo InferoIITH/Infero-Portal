@@ -7,6 +7,7 @@
     <link type="text/css" rel="stylesheet" href="/node_modules/font-awesome/css/font-awesome.css"/>
     <!--scripts -->
     <script src="/node_modules/angular/angular.js"></script>
+    <script type="text/javascript" src="/node_modules/angular-sanitize/angular-sanitize.js"></script>
     <script type="text/javascript" src="/node_modules/jquery/dist/jquery.js"></script>
     <script type="text/javascript" src="/js/materialize.min.js"></script>
     <script type="text/javascript" src="/js/ng.infero.js"></script>
@@ -54,8 +55,98 @@
     </header>
 
     <main>
+        <div class="divider"></div>
+        <div class="container">
+            <a href="#newBlogModal" ng-click="openBlogModal()" class="modal-trigger waves-effect waves-light btn"> <span class="white-text">New Blog</span></a>
+                  
+            <div id="newBlogModal" class="modal modal-fixed-footer">
+            <div class="modal-content">
+              <h4><strong>New Blog</strong></h4>
+                    <form class="col s8 offset-s2">
+                      <div class="row">
+                        <div class="input-field col s8">
+                            <input id="new_blog_title" type="text" class="validate">
+                            <label for="title">Title</label>
+                        </div> 
+
+                        <div class="input-field col s8">
+                            <textarea class="materialize-textarea" id="new_blog_desc" type="text" class="validate"></textarea>
+                            <label for="new_blog_desc">Content</label>
+                        </div>  
+
+                      </div>
+                    </form>
+                </div>  
+                
+            <div class="modal-footer">
+              <a href="#!" ng-click="newBlog()" class="modal-action modal-close waves-effect waves-green btn-flat ">Post blog</a>
+            </div>
+            </div>
+            
+            <div class="row">
+                <div class="col s12 l8"> 
+                      <ul class="blogs" >
+                        <li ng-repeat="blog in blogs">
+                            <div class="card grey lighten-5">
+                                <div class="card-content">
+                                    <span class="card-title"><h5>{{blog.title}}</h5></span>
+                                    <span class="right"> <i class="material-icons">edit</i>&nbsp;<strong>{{blog.author}}</strong></span>  
+                                    <div ng-bind-html="blog.description"></div>    
+                                </div>
+                                <div class="card-action">
+                                    <div class="row">
+                                        <a href="#!" class="activator right"> Comments </a> 
+                                    </div>    
+
+                                </div>
+                                
+                                <div class="card-reveal">
+                                    
+                                   <span class="card-title grey-text text-darken-4">Comments<i class="material-icons right">close</i></span>
+
+                                        <div class="input-field col s10 l10">
+						<textarea class="materialize-textarea" ng-attr-id="{{'comment' +blog.id}}" type="text" class="validate"></textarea>
+                                            <label for="{{'comment' +blog.id}}">comment</label>
+                                        </div>
+                                        <div class="col s2 l2">
+                                            <br>
+                                            <br>
+					    <a class="btn-floating waves-effect waves-light blue-grey" ng-click="postComment(blog.id)"><i class="material-icons">send</i></a>
+				    </div>
+				    <div class = "col s12 l12">
+                                        <ul class="collection">
+                                            <li class="collection-item" ng-repeat="comm in blog.comments">
+						    <strong><span ng-if="comm.Name == undefined">Anonymous</span>{{comm.Name}}</strong>&nbsp;:&nbsp;{{comm.comment}}<br>
+                                            </li> 
+				  	  </ul>
+			   	   </div>
 
 
+                                </div>    
+
+                            </div>
+                        </li>
+                      </ul>
+
+                </div>
+                
+                <div class="col l4">
+                       <div class="card grey lighten-5">
+                                <div class="card-content">
+                                    <span class="card-title"><h5>&nbsp;&nbsp;&nbsp;&nbsp;<strong>Announcements</strong></h5></span>
+                                    <ol>
+                                        <li> Check out our new portal! </li>
+                                        <li> Verify your handles in the profile page </li>
+                                        <li> Check your ranks in the current leaderboard </li>
+                                        <li> Submit assignment 2 before deadline in the portal </li>
+                                    </ol>
+                                 </div>
+                        </div>
+                </div>
+              
+            </div>
+            
+        </div>
     </main>
 
 
@@ -83,8 +174,6 @@
         </div>
     </footer>
 
-    </footer>
-
 </body>
 
 <script>
@@ -92,6 +181,7 @@
     $(".button-collapse").sideNav();
     $(document).ready(function(){
         $('.modal').modal();
+
     });
 </script>
 </html>
