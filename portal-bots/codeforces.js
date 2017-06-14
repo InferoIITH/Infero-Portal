@@ -18,7 +18,8 @@ var updateUser = function(user,callback)
 			{
 				if(body.result.length > 0)
 				{
-					user.codeforces.rating = body.result[body.result.length - 1].newRating;		
+					user.codeforces.rating = body.result[body.result.length - 1].newRating;	
+					console.log(user.Name,user.codeforces.rating);	
 				}
 				user.save(function(err){
 					if(err) {
@@ -39,15 +40,14 @@ var updateUser = function(user,callback)
 
 function codeforcesCronJob()
 {
-	var cf = schedule.scheduleJob('30 * * * *',function()
+	var cf = schedule.scheduleJob('35 * * * *',function()
 	{
 		User.find({}, function(err, users) {
 			async.eachSeries(users, updateUser , function(err){
 				if(err) console.log(err);
 			});
 		});
-	});
-	
+	});	
 }
 
 

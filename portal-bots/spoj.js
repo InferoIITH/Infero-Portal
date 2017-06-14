@@ -7,47 +7,49 @@ var nightmare = Nightmare({ show: true });
 var schedule = require('node-schedule');
 var async = require('async');
 
-function getRatings(searchStr, str) {
-    var index = str.indexOf(searchStr);
-    while(str[index]!=">")
+function getRatings(str) {
+    var index = 0;
+    while(str[index]!="(")
     	index++;
     var start = index+1;
-    while(str[index]!="<")
+    while(str[index]!=" ")
     	index++;
     return str.substring(start,index);
 }
 
 function updateUser(user,callback){
-	if(user && user.hackerrank.handle.length > 0){
-		console.log(user.Name,user.hackerrank.handle,user.hackerrank.handle.length); 
+	if(user && user.spoj.handle.length > 0){
+		console.log(user.Name,user.spoj.handle,user.spoj.handle.length); 
 		nightmare
-		.goto('https://www.hackerrank.com/'+user.hackerrank.handle)
-		.wait('#hacker-contest-score')
+		.goto('https://www.spoj.com/users/'+user.spoj.handle)
+		.wait('#user-profile-left')
 		.evaluate(function(){
-			return document.body.innerHTML;
+			return document.querySelector('#user-profile-left').innerHTML;
 		})
 		.then(function(text){
-			user.hackerrank.rating = getRatings("hacker-contest-score",text);
-			console.log(user.Name,user.hackerrank.rating);
+			user.spoj.points = getRatings(text);
+			console.log(user.Name,user.spoj.points);
 			user.save(function(err){
 			if(err) {
-				console.log("hackerrank",err);
+				console.log("spoj",err);
 			}
 			nightmare.run(function(){
 	    		callback();
 	  		});
+
 		});
-		});	
+		});
 		}
 	else 
 	{
 		callback();
 	}
 };
-function hackerrankCronJob()
+
+function spojCronJob()
 {
-	var hr = schedule.scheduleJob('40 * * * *',function()
-	{
+	var hr = schedule.scheduleJob('45 * * * *',function()
+{
 		nightmare = Nightmare({ show: true });
 		User.find({}, function(err, users) {
 			async.eachSeries(users, updateUser , function(err){
@@ -56,7 +58,6 @@ function hackerrankCronJob()
 			});
 		});
 	});
-
 }
 
-module.exports.hackerrankCronJob = hackerrankCronJob;
+module.exports.spojCronJob = spojCronJob;
