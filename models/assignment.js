@@ -11,11 +11,12 @@ var ass = new schema({
     problems: [{
         'qid' : Number,
         'pid' : String,
-        'desc': String,
+        'tags': [String],
         'link' : String,
-        'solved': [String],
-        'attempted': [String]
-    }]
+        'solved': [{'id': Number , 'link':String }],
+        'rejected': [Number],
+     }],
+   comments : [{'Name': String, 'comment': String}]
 });
 
 

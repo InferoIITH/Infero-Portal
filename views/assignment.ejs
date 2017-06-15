@@ -58,7 +58,7 @@
 	 <div class="divider"></div>
                       
         
-        <div class="container">
+        
 	    <div class = "row">
 		<div class="col s12 l12"> 
             <ul class="assignments" >
@@ -70,8 +70,8 @@
 						<ul class ='collection'>
                               
                        <li class="collection-item"  ng-repeat = "problem in assignment.problems">
-                          <span ng-if ="checkSolved(problem) == true"><i class="material-icons green-text">check_circle</i> </span>
-                          <span ng-if ="checkRejected(problem) == true"><i class="material-icons red">cancel</i> </span>
+                          <span ng-if ="checkSolved(problem)"><i class="material-icons green">check_circle</i> </span>
+                          <span ng-if ="checkRejected(problem)"><i class="material-icons red">cancel</i> </span>
                           <span ng-click="problem.toggle = ! problem.toggle"><strong>{{problem.qid}}.&nbsp;{{problem.pid}}</strong></span>
                           <div ng-if="problem.toggle"><span ng-repeat="tag in problem.tags"> <div class="chip"> {{tag}}</div></span><br>  
                                 <div class="row">
@@ -127,9 +127,8 @@
                 </li>
               </ul>
         </div>
-	   
+	
        	 </div>
-         </div>
     </main>
 
 

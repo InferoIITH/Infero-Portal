@@ -43,7 +43,7 @@
                 <li ng-if="user.loggedIn == true" "> <a href="/profile"><span class="fa fa-user-circle" style = "padding-right: 5px"></span> {{user.Name}} </a></li>
             </ul>
             <ul id="mobile-view" class="side-nav">
-                <li class="active"><a href="/">Blog</a></li>
+                <li class="active"><a href="/">Home</a></li>
                 <li><a href="/ranks">Standings</a></li>
                 <li><a href="/contests">Contests</a> </li>
                 <li><a href="/assignments">Assignments</a></li>
@@ -55,43 +55,55 @@
     </header>
 
     <main>
-	    <h6>Ongoing contests </h6>
-	    <ul class="collection">
-	    	<li ng-repeat="contest in contests.ongoing" class="collection-item-avatar">
-			<img ng-if="contest.platform=='Codeforces'" style="width:50px;height:50px;" src="/images/Codeforces.png" alt="" class="circle"></img>
-			<img ng-if="contest.platform=='Codechef'" style="width:50px;height:50px;"src="/images/Codechef.jpg" alt="" class="circle"></img>
-			<img ng-if="contest.platform=='HackerRank'" style="width:50px;height:50px;"src="/images/HackerRank.jpg" alt="" class="circle"></img>
-			<span class="title">{{ contest.title }}	</span>
-			<p> {{ contest.desciption }} </p> <br>
-			<strong>Timing</strong> &nbsp;{{contest.startime}} <strong> -</strong> {{contest.endtime}}<br>
-			<a class="button" href="contest.link">Details</a>  
-		</li>
-	</ul>
-	  <h6>Upcoming contests </h6>
-	    <ul class="collection">
-	    	<li ng-repeat="contest in contests.future" class="collection-item-avatar">
-			<img ng-if="contest.platform=='Codeforces'" style="width:50px;height:50px;"src="/images/Codeforces.png" alt="" class="circle"></img>
-			<img ng-if="contest.platform=='Codechef'" style="width:50px;height:50px;"src="/images/Codechef.jpg" alt="" class="circle"></img>
-			<img ng-if="contest.platform=='HackerRank'" style="width:50px;height:50px;"src="/images/HackerRank.jpg" alt="" class="circle"></img>
-			<span class="title">{{ contest.title }}	</span>
-			<p> {{ contest.desciption }} </p> <br>
-			<strong>Timing</strong> &nbsp;{{contest.startime}} <strong> -</strong> {{contest.endtime}}<br>
-			<a class="button" href="contest.link">Details</a>  
-		</li>
-	</ul>
+        <div class="container">
+            <br>
+    	    <h5><strong>Ongoing contests </strong></h5>
+    	    <ul class="collection">
+    	    	<li ng-repeat="contest in contests.ongoing" class="collection-item avatar">
+    			<img ng-if="contest.platform=='Codeforces'" style="width:50px;height:50px;" src="/images/Codeforces.png" alt="" class="circle"></img>
+    			<img ng-if="contest.platform=='Codechef'" style="width:50px;height:50px;"src="/images/Codechef.jpg" alt="" class="circle"></img>
+    			<img ng-if="contest.platform=='HackerRank'" style="width:50px;height:50px;"src="/images/HackerRank.jpg" alt="" class="circle"></img>
+    			<span class="title"><strong>{{ contest.title }}	</strong></span>
+    			<p> {{ contest.description }} </p> <br>
+    			<strong>Timing :</strong> &nbsp;{{contest.start}} <strong> -</strong> {{contest.end}}<br>
+    			<strong> Duration: </strong>{{contest.duration.days}}d {{contest.duration.hours}}h {{contest.duration.minutes}}m <br>
+                <a class="button" ng-href="{{contest.link}}">Details</a>
 
-	  <h6>Archived contests </h6>
-	    <ul class="collection">
-	    	<li ng-repeat="contest in contests.past" class="collection-item-avatar">
-			<img ng-if="contest.platform=='Codeforces'" style="width:50px;height:50px;"src="/images/Codeforces.png" alt="" class="circle"></img>
-			<img ng-if="contest.platform=='Codechef'" style="width:50px;height:50px;"src="/images/Codechef.jpg" alt="" class="circle"></img>
-			<img ng-if="contest.platform=='HackerRank'" style="width:50px;height:50px;"src="/images/HackerRank.jpg" alt="" class="circle"></img>
-			<span class="title">{{ contest.title }}	</span>
-			<p> {{ contest.desciption }} </p> <br>
-			<strong>Timing</strong> &nbsp;{{contest.startime}} <strong> -</strong> {{contest.endtime}}<br>
-			<a class="button" href="contest.link">Details</a>  
-		</li>
-	</ul>
+    		</li>
+    	</ul>
+        <br>
+    	<h5><strong>Upcoming contests</strong> </h5>
+    	    <ul class="collection">
+    	    	<li ng-repeat="contest in contests.future" class="collection-item avatar">
+    			<img ng-if="contest.platform=='Codeforces'" style="width:50px;height:50px;"src="/images/Codeforces.png" alt="" class="circle"></img>
+    			<img ng-if="contest.platform=='Codechef'" style="width:50px;height:50px;"src="/images/Codechef.jpg" alt="" class="circle"></img>
+    			<img ng-if="contest.platform=='HackerRank'" style="width:50px;height:50px;"src="/images/HackerRank.jpg" alt="" class="circle"></img>
+    			<span class="title"><strong>{{ contest.title }}</strong>	</span>
+    			<p> {{ contest.description }} </p> <br>
+    			<strong>Timing : </strong> &nbsp;{{contest.start}} <strong> -</strong> {{contest.end}}<br>
+    			<strong> Duration: </strong>{{contest.duration.days}}d {{contest.duration.hours}}h {{contest.duration.minutes}}m <br>
+                <a class="button" ng-href="{{contest.link}}">Details</a>
+
+
+    		</li>
+    	</ul>
+        <br>
+    	<h5><strong>Archived contests </strong></h5>
+    	    <ul class="collection">
+    	    	<li ng-repeat="contest in contests.past" class="collection-item avatar">
+    			<img ng-if="contest.platform=='Codeforces'" style="width:50px;height:50px;"src="/images/Codeforces.png" alt="" class="circle"></img>
+    			<img ng-if="contest.platform=='Codechef'" style="width:50px;height:50px;"src="/images/Codechef.jpg" alt="" class="circle"></img>
+    			<img ng-if="contest.platform=='HackerRank'" style="width:50px;height:50px;"src="/images/HackerRank.jpg" alt="" class="circle"></img>
+    			<span class="title"><strong>{{ contest.title }}</strong>	</span>
+    			<p> {{ contest.description }} </p> <br>
+    			<strong>Timing :</strong> &nbsp;{{contest.start}} <strong> -</strong> {{contest.end}}<br>
+    			<strong> Duration: </strong>{{contest.duration.days}}d {{contest.duration.hours}}h {{contest.duration.minutes}}m <br>
+                <a class="button" ng-href="{{contest.link}}">Details</a>
+
+    		</li>
+    	</ul>
+        </div>
+
     
     </main>
 

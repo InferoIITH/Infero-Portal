@@ -56,80 +56,78 @@
     <main>
 
 	 <div class="divider"></div>
+     <ul class="assignments" >
+        <li ng-repeat="assignment in assignments">
                       
-        
-        <div class="container">
+        <ul>
+                                      
+           <li ng-repeat = "problem in assignment.problems">
+              <span ng-click="problem.toggle = ! problem.toggle"><i class="material-icons">add_circle</i><strong>{{problem.qid}}.&nbsp;{{problem.pid}}</strong></span>
+              <div ng-if="problem.toggle"><span>{{problem.desc}} <br> <a ng-href= {{problem.link}} class="button"> Link </a></span> 
+                    <div class="row">
+                        <div class="col s10 l10"> 
+                            <span>Submit</span>
+                            <label for="{{'problem' +assignment.id + problem.qid}}">link</label>
+                            <input ng-attr-id="{{'problem' + assignment.id + problem.qid}}" type="text" class="validate"/>
+                       </div>
+                        <div class="col s2 l2">
+                            <br>
+                            <br>
+                            <a class="btn-floating waves-effect waves-light blue-grey" ng-click="postAssComment(assignment.id)"><i class="material-icons">send</i></a>
+                        </div>
+                    </div> 
+            </div>
+        </li> 
+        </ul>
+        </li>
+        </ul>
 	    <div class = "row">
 		<div class="col s12 l12"> 
-            <ul class="assignments" >
-                <li ng-repeat="assignment in assignments">
-        
-                    <div class="card grey lighten-5">
-                        <div class="card-content">
-						<span class="card-title"><h5>Assignment&nbsp;{{assignment.id}}</h5></span>
-						<ul class ='collection'>
-                              
-                       <li class="collection-item"  ng-repeat = "problem in assignment.problems">
-                          <span ng-if ="checkSolved(problem) == true"><i class="material-icons green-text">check_circle</i> </span>
-                          <span ng-if ="checkRejected(problem) == true"><i class="material-icons red">cancel</i> </span>
-                          <span ng-click="problem.toggle = ! problem.toggle"><strong>{{problem.qid}}.&nbsp;{{problem.pid}}</strong></span>
-                          <div ng-if="problem.toggle"><span ng-repeat="tag in problem.tags"> <div class="chip"> {{tag}}</div></span><br>  
-                                <div class="row">
-                                    <div class="col s10 l10">
-                                        <a ng-href= {{problem.link}} class="button"> Problem Link </a> <br>
-                                        <label for="{{problem.qid}}">Submission link</label>
-                                        <input ng-attr-id="{{problem.qid}}" type="text" class="validate"/>
-                                   </div>
-                                    <div class="col s2 l2">
-                                        <br>
-                                        <br>
-                                        <a class="btn-floating waves-effect waves-light blue-grey" ng-click="submitLink(assignment.id,problem.qid)"><i class="material-icons">send</i></a>
-                                    </div>
-                                </div> 
-                        </div>
-                    </li> 
-                    </ul>  
-						</div>
-	
-                        <div class="card-action">
-							<div class="row">
-								<a href="#!" class="activator right"> Comments </a> 
-							</div>
 
-                        </div>
-                        
-                        <div class="card-reveal">
-                            
-                           <span class="card-title grey-text text-darken-4">Comments<i class="material-icons right">close</i></span>
+                            <div class="card grey lighten-5">
+                                <div class="card-content">
+								<span class="card-title"><h5>Assignment&nbsp;{{assignment.id}}</h5></span>
+								  
+								</div>
+			
+                                <div class="card-action">
+									<div class="row">
+										<a href="#!" class="activator right"> Comments </a> 
+									</div>
 
-                                <div class="input-field col s10 l10">
-									<textarea class="materialize-textarea" ng-attr-id="{{'assignment' + assignment.id}}" type="text" class="validate"></textarea>
-                                    <label for="{{'assignment' +assignment.id}}">comment</label>
                                 </div>
-                                <div class="col s2 l2">
-                                    <br>
-                                    <br>
-								    <a class="btn-floating waves-effect waves-light blue-grey" ng-click="postAssComment(assignment.id)"><i class="material-icons">send</i></a>
-							    </div>
-							    <div class = "col s12 l12">
-			                                        <ul class="collection">
-			                                            <li class="collection-item" ng-repeat="comm in assignment.comments">
-									    <strong><span ng-if="comm.Name == undefined">Anonymous</span>{{comm.Name}}</strong>&nbsp;:&nbsp;{{comm.comment}}<br>
-			                                            </li> 
-							  	  </ul>
-						   	   </div>
+                                
+                                <div class="card-reveal">
+                                    
+                                   <span class="card-title grey-text text-darken-4">Comments<i class="material-icons right">close</i></span>
+
+                                        <div class="input-field col s10 l10">
+											<textarea class="materialize-textarea" ng-attr-id="{{'assignment' + assignment.id}}" type="text" class="validate"></textarea>
+                                            <label for="{{'assignment' +assignment.id}}">comment</label>
+                                        </div>
+                                        <div class="col s2 l2">
+                                            <br>
+                                            <br>
+										    <a class="btn-floating waves-effect waves-light blue-grey" ng-click="postAssComment(assignment.id)"><i class="material-icons">send</i></a>
+									    </div>
+									    <div class = "col s12 l12">
+					                                        <ul class="collection">
+					                                            <li class="collection-item" ng-repeat="comm in assignment.comments">
+											    <strong><span ng-if="comm.Name == undefined">Anonymous</span>{{comm.Name}}</strong>&nbsp;:&nbsp;{{comm.comment}}<br>
+					                                            </li> 
+									  	  </ul>
+								   	   </div>
 
 
-                        </div>    
+                                </div>    
 
-                    </div>
-                    
-                </li>
-              </ul>
-        </div>
-	   
+                            </div>
+                            
+                        </li>
+                      </ul>
+                </div>
+	
        	 </div>
-         </div>
     </main>
 
 

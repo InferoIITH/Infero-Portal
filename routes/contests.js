@@ -11,44 +11,59 @@ function check_validity(a)
 router.get('/getContests',function(req,res){
 	Contest.find({}, function(err, contests) {
 		var valid_contests = contests.filter(check_validity);
+
 		valid_contests.sort(function(a,b){
-			if(a.starttime > b.starttime) return -1;
-			else if(a.starttime < b.starttime) return 1;
+			if(a.starttime < b.starttime) return -1;
+			else if(a.starttime > b.starttime) return 1;
 			else return 0;
 		});
+
 		var check = new Date();
 		var past_contests = [];
 		var past_count = 0;
 		var ongoing_contests = [];
 		var future_count = 0;
 		var future_contests = [];
-
-		var first_found = -1;
-		var last_found = -1;
-		for(var i=0;i < valid_contests.length;i++){
-			console.log(valid_contests[i].starttime,check);
-			if(valid_contests[i].starttime <= check && check <= valid_contests){
-				if(first_found == -1) first_found = i;
-				ongoing_contests.push(valid_contests[i]);
-			}
-			else if(first_found != -1){
-				last_found = i;
-			}
+		
+		var last_past = -1;
+		var first_future = -1;
+		console.log(check);
+		var i = 0;
+		
+		while(valid_contests[i].endtime < check && valid_contests[i].starttime < check && i < valid_contests.length){
+			i++;
 		}
-		if(first_found != -1){
-			var j = first_found - 1;
-			while(j > 0 && past_count<5){
+
+		last_past = i - 1;
+		if(valid_contests[i].starttime <= check && check <= valid_contests[i].endtime && i < valid_contests.length){
+			while(valid_contests[i].starttime <= check && check <= valid_contests[i].endtime && i < valid_contests.length){
+				ongoing_contests.push(valid_contests[i]);
+				i++;
+			}
+
+		}
+		if(i < valid_contests.length)
+			first_future = i;
+		
+		console.log(last_past);
+		console.log(first_future);
+		if(last_past != -1){
+			var j = last_past;
+			while(j >= 0 && past_count<5){
 				past_count++;
 				past_contests.push(valid_contests[j]);
+				j--;
 			}
 		}
-		if(last_found != -1){
-			var j = last_found;
+		if(first_future != -1){
+			var j = first_future;
 			while(j < valid_contests.length && future_count<5){
 				future_count++;
 				future_contests.push(valid_contests[j]);
+				j++;
 			}
 		}
+			
 		console.log(valid_contests);
 		console.log(past_contests);
 		console.log(ongoing_contests);

@@ -34,12 +34,36 @@ function getContests($scope,$http){
 		url : '/contests/getContests'
 	}).then(function mySuccess(res){
 		if(res.data.status) {
+			var days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+			var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec"]
 			$scope.contests.ongoing = res.data.ongoing;
+			for(var i = 0; i < $scope.contests.ongoing.length; i++)
+			{
+				var st = new Date($scope.contests.ongoing[i].starttime);
+				var s = days[st.getDay()] + ", " + months[st.getMonth()] + " " + st.getDate() + " "+ st.getFullYear() + "  " + ("00"+st.getHours()).slice(-2) + ":" + ("00"+ st.getMinutes()).slice(-2) + ":" + ("00"+st.getSeconds()).slice(-2) + " hrs";
+				$scope.contests.ongoing[i].start = s.toString();
+				var en = new Date($scope.contests.ongoing[i].endtime);
+				$scope.contests.ongoing[i].end = (days[en.getDay()] + ", " + months[en.getMonth()] + " " + en.getDate()+ " "+ en.getFullYear() + "  " + ("00"+en.getHours()).slice(-2) + ":" + ("00"+ en.getMinutes()).slice(-2) + ":" + ("00"+en.getSeconds()).slice(-2) + " hrs").toString();
+			}
 			$scope.contests.past = res.data.past;
+			for(var i = 0; i < $scope.contests.past.length; i++)
+			{
+				var st = new Date($scope.contests.past[i].starttime);
+				$scope.contests.past[i].start = (days[st.getDay()] + ", " + months[st.getMonth()] + " " + st.getDate() + " " +st.getFullYear() + "  " + ("00"+st.getHours()).slice(-2) + ":" + ("00"+ st.getMinutes()).slice(-2) + ":" + ("00"+st.getSeconds()).slice(-2) + " hrs").toString();
+				var en = new Date($scope.contests.past[i].endtime);
+				$scope.contests.past[i].end = (days[en.getDay()] + ", " + months[en.getMonth()] + " " + en.getDate()+ " "+ en.getFullYear() + "  " + ("00"+en.getHours()).slice(-2) + ":" + ("00"+ en.getMinutes()).slice(-2) + ":" + ("00"+en.getSeconds()).slice(-2) + " hrs").toString();
+			}			
 			$scope.contests.future = res.data.future;
+			for(var i = 0; i < $scope.contests.future.length; i++)
+			{
+				var st = new Date($scope.contests.future[i].starttime);
+				$scope.contests.future[i].start = (days[st.getDay()] + ", " + months[st.getMonth()] + " " + st.getDate()+ " "+st.getFullYear() + "  " + ("00"+st.getHours()).slice(-2) + ":" + ("00"+ st.getMinutes()).slice(-2) + ":" + ("00"+st.getSeconds()).slice(-2) + " hrs").toString();
+				var en = new Date($scope.contests.future[i].endtime);
+				$scope.contests.future[i].end = (days[en.getDay()] + ", " + months[en.getMonth()] + " " + en.getDate() + " "+ en.getFullYear() + "  " + ("00"+en.getHours()).slice(-2) + ":" + ("00"+ en.getMinutes()).slice(-2) + ":" + ("00"+en.getSeconds()).slice(-2) + " hrs").toString();
+			}			
 		}
 	},function myError(res){
-		console.log("Error in getting blogs");
+		console.log("Error in getting contests");
 	});
 }
 
@@ -63,6 +87,20 @@ function getStandings($scope,$http){
 
 
 }
+
+function getAssignments($scope,$http){
+	$http({
+		method : "GET",
+		url    : '/assignments/getAssignments'
+	}).then(function mySuccess(res){
+		if(res.data.status){
+			$scope.assignments = res.data.assignments;
+			
+		}	
+	},function myError(res){
+		console.log("Error in getting assignments")
+	});
+}
 var app = angular.module('Infero',['ngSanitize']);
 
 app.controller('InferoController',function($scope,$http){
@@ -71,12 +109,14 @@ app.controller('InferoController',function($scope,$http){
 	$scope.user.loggedIn = false;
 	$scope.blogs = [];
 	$scope.contests = {'ongoing': [] , 'past': [] , 'future': []};
+	$scope.assignments = [];
 
 	checkLoginStatus($scope,$http);
 	getBlog($scope,$http);
 	getContests($scope,$http);
 	getStandings($scope,$http);
-	
+	getAssignments($scope,$http);
+
 	$scope.updateInfo = function() {
 		$("#cforces").val($scope.user.codeforces.handle);
 		$("#spoj").val($scope.user.spoj.handle);
@@ -140,6 +180,65 @@ app.controller('InferoController',function($scope,$http){
 		});		
 	}
 
+	
+	$scope.submitLink = function(id,qid){
+		var link = $('#'+qid).val();
+	
+		var usr = {'uid':$scope.user.id , 'link': link, 'id': id, 'qid': qid};
+		console.log(usr);
+		$http({
+			method: "POST",
+			url : 'assignments/submitLink',
+		 	data : usr
+					
+		}).then(function mySuccess(res){
+			if(res.data.status){
+			Materialize.toast("Posted solution!",2000);
+			getAssignments($scope,$http);
+							
+			}
+					
+		},function myError(res){
+			console.log("error in posting solution");
+					
+		});	
+
+			
+	}
+
+	$scope.checkSolved = function(problem){
+		function checkIt(id){
+			return problem.solved.filter(function(data){
+				return data.id == id; 
+			});
+		}
+		return checkIt($scope.user.id).length > 0
+	}
+	$scope.checkRejected = function(problem){
+		function checkIt(id){
+			return problem.rejected.filter(function(data){
+				return data.id == id; 
+			});
+		}
+		return checkIt($scope.user.id).length > 0;
+	}
+	$scope.postAssComment = function(id){
+		var comment  = $('#assignment'+id).val();
+		console.log(comment);
+		var cmt = {'Name': $scope.user.Name, 'comment': comment, 'id': id};
+		$http({
+			method: "POST",
+			url : 'assignments/newComment',
+			data : cmt
+		}).then(function mySuccess(res){
+			if(res.data.status){
+				Materialize.toast("Posted comment!",2000);
+				getAssignments($scope,$http);
+			}
+		},function myError(res){
+			console.log("error in posting comment");
+		});
+	}
 	$scope.postComment = function(id) {
 		var comment  = $('#comment'+id).val();
 
