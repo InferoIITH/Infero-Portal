@@ -63,7 +63,11 @@
     			<img ng-if="contest.platform=='Codeforces'" style="width:50px;height:50px;" src="/images/Codeforces.png" alt="" class="circle"></img>
     			<img ng-if="contest.platform=='Codechef'" style="width:50px;height:50px;"src="/images/Codechef.jpg" alt="" class="circle"></img>
     			<img ng-if="contest.platform=='HackerRank'" style="width:50px;height:50px;"src="/images/HackerRank.jpg" alt="" class="circle"></img>
-    			<span class="title"><strong>{{ contest.title }}	</strong></span>
+    			<p>Priority:</p>
+			<div ng-if="contest.priority=='High'" style="width:50px;height:50px;" color="red">{{contest.priority}}</div>
+			<div ng-if="contest.priority=='Medium'" style="width:50px;height:50px;" color="green">{{contest.prioriy}}</div>
+			<div ng-if="contest.priority=='Low'" style="width:50px;height:50px;" color="yellow">{{contest.priority}}</div>		
+			<span class="title"><strong>{{ contest.title }}	</strong></span>
     			<p> {{ contest.description }} </p> <br>
     			<strong>Timing :</strong> &nbsp;{{contest.start}} <strong> -</strong> {{contest.end}}<br>
     			<strong> Duration: </strong>{{contest.duration.days}}d {{contest.duration.hours}}h {{contest.duration.minutes}}m <br>
@@ -78,6 +82,9 @@
     			<img ng-if="contest.platform=='Codeforces'" style="width:50px;height:50px;"src="/images/Codeforces.png" alt="" class="circle"></img>
     			<img ng-if="contest.platform=='Codechef'" style="width:50px;height:50px;"src="/images/Codechef.jpg" alt="" class="circle"></img>
     			<img ng-if="contest.platform=='HackerRank'" style="width:50px;height:50px;"src="/images/HackerRank.jpg" alt="" class="circle"></img>
+			<div ng-if="contest.priority=='High'" style="width:50px;height:50px;" color="red">{{contest.priority}}</div>
+			<div ng-if="contest.priority=='Medium'" style="width:50px;height:50px;" color="green">{{contest.prioriy}}</div>
+			<div ng-if="contest.priority=='Low'" style="width:50px;height:50px;" color="yellow">{{contest.priority}}</div>	
     			<span class="title"><strong>{{ contest.title }}</strong>	</span>
     			<p> {{ contest.description }} </p> <br>
     			<strong>Timing : </strong> &nbsp;{{contest.start}} <strong> -</strong> {{contest.end}}<br>
@@ -94,7 +101,10 @@
     			<img ng-if="contest.platform=='Codeforces'" style="width:50px;height:50px;"src="/images/Codeforces.png" alt="" class="circle"></img>
     			<img ng-if="contest.platform=='Codechef'" style="width:50px;height:50px;"src="/images/Codechef.jpg" alt="" class="circle"></img>
     			<img ng-if="contest.platform=='HackerRank'" style="width:50px;height:50px;"src="/images/HackerRank.jpg" alt="" class="circle"></img>
-    			<span class="title"><strong>{{ contest.title }}</strong>	</span>
+    			<div ng-if="contest.priority=='High'" style="width:50px;height:50px;" color="red">{{contest.priority}}</div>
+			<div ng-if="contest.priority=='Medium'" style="width:50px;height:50px;" color="green">{{contest.prioriy}}</div>
+			<div ng-if="contest.priority=='Low'" style="width:50px;height:50px;" color="yellow">{{contest.priority}}</div>	
+			<span class="title"><strong>{{ contest.title }}</strong>	</span>
     			<p> {{ contest.description }} </p> <br>
     			<strong>Timing :</strong> &nbsp;{{contest.start}} <strong> -</strong> {{contest.end}}<br>
     			<strong> Duration: </strong>{{contest.duration.days}}d {{contest.duration.hours}}h {{contest.duration.minutes}}m <br>
