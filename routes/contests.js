@@ -34,7 +34,6 @@ router.get('/getContests',function(req,res){
 			i++;
 		}
 
-		last_past = i - 1;
 		if(valid_contests[i].starttime <= check && check <= valid_contests[i].endtime && i < valid_contests.length){
 			while(valid_contests[i].starttime <= check && check <= valid_contests[i].endtime && i < valid_contests.length){
 				ongoing_contests.push(valid_contests[i]);
@@ -42,19 +41,14 @@ router.get('/getContests',function(req,res){
 			}
 
 		}
+		while(valid_contests[i].starttime < check)
+			i++;
+
 		if(i < valid_contests.length)
 			first_future = i;
 		
-		console.log(last_past);
 		console.log(first_future);
-		if(last_past != -1){
-			var j = last_past;
-			while(j >= 0 && past_count<5){
-				past_count++;
-				past_contests.push(valid_contests[j]);
-				j--;
-			}
-		}
+
 		if(first_future != -1){
 			var j = first_future;
 			while(j < valid_contests.length && future_count<5){
@@ -63,7 +57,30 @@ router.get('/getContests',function(req,res){
 				j++;
 			}
 		}
-			
+
+		valid_contests.sort(function(a,b){
+			if(a.endtime < b.endtime) return -1;
+			else if(a.endtime > b.endtime) return 1;
+			else return 0;
+		});
+
+		i = 0;
+		
+		while(valid_contests[i].endtime < check && i < valid_contests.length){
+			i++;
+		}
+		last_past = i - 1;
+
+		console.log(last_past);
+
+		if(last_past != -1){
+			var j = last_past;
+			while(j >= 0 && past_count<5){
+				past_count++;
+				past_contests.push(valid_contests[j]);
+				j--;
+			}
+		}	
 		console.log(valid_contests);
 		console.log(past_contests);
 		console.log(ongoing_contests);
